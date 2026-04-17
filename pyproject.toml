@@ -5,10 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "dlt[motherduck,workspace,hub]>=1.20.0",
+    "dlt[motherduck,workspace,hub]",
     # motherduck does not work with 1.4.3
     "duckdb<1.4.3",
     "numpy>=2.3.5",
     "pyarrow-hotfix>=0.7",
-    "dlt-runtime>=0.20.1",
+    "dlt-runtime>=0.25.0a0",
 ]
+
+[tool.uv.sources]
+dlt = { url = "https://github.com/dlt-hub/dlt/archive/refs/heads/feat/workspace-deployment.zip?v=8" }

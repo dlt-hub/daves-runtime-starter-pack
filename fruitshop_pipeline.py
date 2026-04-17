@@ -7,6 +7,8 @@ import random
 from datetime import datetime, timedelta  # noqa: I251
 
 from dlt.common import Decimal
+from dlt.hub import run
+from dlt.hub.run import trigger
 
 
 # NOTE: we add a custom hint to the name column to indicate that it contains PII (personally identifiable information)
@@ -81,6 +83,11 @@ def fruitshop():
     return customers(), inventory_categories(), inventory(), purchases()
 
 
+@run.pipeline(
+    "fruitshop",
+    trigger=trigger.every("10m"),
+    expose={"tags": ["ingest"], "display_name": "Fruitshop ingest"},
+)
 def load_shop() -> None:
     # specify the pipeline name, destination and dataset name when configuring pipeline,
     # otherwise the defaults will be used that are derived from the current script name
